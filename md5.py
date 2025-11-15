@@ -32,12 +32,12 @@ def H(x, y, z):
 def I(x, y, z):
     return y ^ (x | ~z)
 
-def left_rotate(x, amount):
+def rotate_left(x, n):
     x &= 0xFFFFFFFF
-    return (x << amount | x >> (32 - amount)) & 0xFFFFFFFF
+    return (x << n | x >> (32 - n)) & 0xFFFFFFFF
 
 def op(a, b, c, d, k, s, i, f, x):
-    a = b + left_rotate(a + f(b, c, d) + x[k] + table[i-1], s)
+    a = b + rotate_left(a + f(b, c, d) + x[k] + table[i-1], s)
     return a & 0xFFFFFFFF
 
 def md5(msg):
