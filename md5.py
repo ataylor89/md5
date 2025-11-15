@@ -137,6 +137,7 @@ if __name__ == '__main__':
     group.add_argument('message', nargs='?', type=str)
     group.add_argument('-i', '--inputfile', type=str) 
     parser.add_argument('-o', '--outputfile', type=str)
+    parser.add_argument('-c', '--compare', action='store_true')
     args = parser.parse_args()
     if args.message:
         msg = args.message
@@ -149,3 +150,7 @@ if __name__ == '__main__':
     if args.outputfile:
         with open(args.outputfile, 'w') as file:
             file.write(hash.hexdigest)
+    if args.compare:
+        import hashlib
+        hash = hashlib.md5(encoding)
+        print('Message digest:', hash.hexdigest(), '(hashlib)')
