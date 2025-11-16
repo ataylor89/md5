@@ -140,17 +140,16 @@ if __name__ == '__main__':
     parser.add_argument('-c', '--compare', action='store_true')
     args = parser.parse_args()
     if args.message:
-        msg = args.message
+        msg = args.message.encode('utf-8')
     elif args.inputfile:
-        with open(args.inputfile, 'r') as file:
+        with open(args.inputfile, 'rb') as file:
             msg = file.read()
-    encoding = msg.encode('utf-8')
-    hash = md5(encoding)
+    hash = md5(msg)
     print('Message digest:', hash.hexdigest)
     if args.outputfile:
         with open(args.outputfile, 'w') as file:
             file.write(hash.hexdigest)
     if args.compare:
         import hashlib
-        hash = hashlib.md5(encoding)
+        hash = hashlib.md5(msg)
         print('Message digest:', hash.hexdigest(), '(hashlib)')
