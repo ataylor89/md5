@@ -147,11 +147,11 @@ if __name__ == '__main__':
         with open(args.inputfile, 'rb') as file:
             msg = file.read()
     hash = md5(msg)
-    print('Message digest:', hash.hexdigest)
+    print(hash.hexdigest)
     if args.outputfile:
         with open(args.outputfile, 'w') as file:
             file.write(hash.hexdigest)
     if args.compare:
         import hashlib
         hash = hashlib.md5(msg)
-        print('Message digest:', hash.hexdigest(), '(hashlib)')
+        print(hash.hexdigest(), '(hashlib)')
